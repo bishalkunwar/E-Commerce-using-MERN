@@ -59,6 +59,6 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "http://192.168.29.21:5000",
-    "secure": false
+    "proxy": "http://192.168.146.1:5000/"
+
 }

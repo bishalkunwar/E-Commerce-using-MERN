@@ -29,7 +29,7 @@ exports.createProduct = async(req, res) => {
 // Get all products controller.
 exports.getAllProducts = async(req, res) => {
 
-    const resultPerPage = 1;
+    const resultPerPage = 8;
     const productCount = await Product.countDocuments();
     try {
         const apiFeatures = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
