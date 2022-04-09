@@ -2,10 +2,12 @@ import "./App.css";
 import Header from "./component/layout/Header/Header.js";
 import Footer from "./component/layout/Footer/Footer.js";
 import Home from "./component/Home/Home.js";
-import Loader from "./component/layout/Loader/Loader";
+// import Loader from "./component/layout/Loader/Loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
+
+import ProductDetails from "./component/Product/productDetails";
 // import React from "react";
 
 const App = () => {
@@ -26,8 +28,8 @@ const App = () => {
         Route exact path = "/"
         component = { Home }
         />{" "} <
-        Route exact path = "/load"
-        component = { Loader }
+        Route exact path = "/product/:id"
+        component = { ProductDetails }
         /> < /
         Switch > { " " } <
         Footer / >
