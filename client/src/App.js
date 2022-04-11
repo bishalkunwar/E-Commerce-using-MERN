@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
 
-import ProductDetails from "./component/Product/productDetails";
+import ProductDetails from "./component/Product/ProductDetails";
 // import React from "react";
 
 const App = () => {
