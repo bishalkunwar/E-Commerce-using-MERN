@@ -68,17 +68,3 @@ const Home = () => {
                 };
 
                 export default Home;
-
-                // <div className="container" id="container">
-                // <Product product={product} /> <Product product={product} />{" "}
-                // <Product product={product} /> <Product product={product} />{" "}
-                // <Product product={product} /> <Product product={product} />{" "}
-                // </div>{" "}
-
-                // <div className="container" id="container">
-                //         {" "}
-                //         {products &&
-                //           products.map((product) => (
-                //             <ProductCard key={product._id} product={product} />
-                //           ))}{" "}
-                //       </div>{" "}

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails, clearErrors } from "../../actions/productAction";
 import { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
+import ReviewCard from "./ReviewCard";
 
 const ProductDetails = ({ match }) => {
     const dispatch = useDispatch();
@@ -33,18 +34,18 @@ const ProductDetails = ({ match }) => {
         <
         div >
         <
-        Carousel > {
+        Carousel > { " " } {
             product.images &&
-            product.images.map((item, i) => ( <
-                img className = "CarouselImage"
-                key = { i }
-                src = { item.url }
-                alt = { `${i} Slide` }
-                />
-            ))
-        } <
-        /Carousel> < /
-        div > <
+                product.images.map((item, i) => ( <
+                    img className = "CarouselImage"
+                    key = { i }
+                    src = { item.url }
+                    alt = { `${i} Slide` }
+                    />
+                ))
+        } { " " } <
+        /Carousel>{" "} <
+        /div>{" "} <
         div >
         <
         div className = "detailsBlock-1" >
@@ -58,8 +59,8 @@ const ProductDetails = ({ match }) => {
         span > { " " }
         ({ product.numOfReviews }
             Reviews) { " " } <
-        /span>{" "} < /
-        div > { " " } <
+        /span>{" "} <
+        /div>{" "} <
         div className = "detailsBlock-3" >
         <
         h1 > { `Rs.${product.price}` } < /h1>{" "} <
@@ -69,23 +70,37 @@ const ProductDetails = ({ match }) => {
         <
         button > - < /button> <input value="1" type="number" / >
         <
-        button > + < /button>{" "} < /
-        div > { " " } <
-        button > Add to Cart < /button>{" "} < /
-        div > { " " } <
+        button > + < /button>{" "} <
+        /div>{" "} <
+        button > Add to Cart < /button>{" "} <
+        /div>{" "} <
         p >
         Status: { " " } <
         b className = { product.Stock < 1 ? "redColor" : "greenColor" } > { " " } { product.Stock < 1 ? "OutOfStock" : "InStock" } { " " } <
-        /b>{" "} < /
-        p > { " " } <
+        /b>{" "} <
+        /p>{" "} <
         /div>{" "} <
         div className = "detailsBlock-4" >
-        Description: < p > { product.description } < /p>{" "} < /
-        div > { " " } <
-        button className = "submitReview" > Submit Review < /button>{" "} < /
-        div > { " " } <
-        /div>{" "} < /
-        Fragment >
+        Description: < p > { product.description } < /p>{" "} <
+        /div>{" "} <
+        button className = "submitReview" > Submit Review < /button>{" "} <
+        /div>{" "} <
+        /div>{" "} <
+        h3 className = "reviewsHeading" > REVIEWS < /h3>{" "} {
+            product.reviews && product.reviews[0] ? ( <
+                div className = "reviews" > { " " } {
+                    product.reviews &&
+                        product.reviews.map((review) => ( <
+                            ReviewCard review = { review }
+                            />
+                        ))
+                } { " " } <
+                /div>
+            ) : ( <
+                p className = "noReviews" > No Reviews Yet < /p>
+            )
+        } { " " } <
+        /Fragment>
     );
 };
 
