@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from "react";
 import { CgMouse } from "react-icons/all";
 import "./Home.css";
-import Product from "./Product";
+import Product from "./ProductCard";
 import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
-import { getProduct } from "../../actions/productAction";
+import { getProduct, clearErrors } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 
@@ -20,20 +20,17 @@ const Home = () => {
         const dispatch = useDispatch();
         const { loading, products, error } = useSelector((state) => state.products);
 
-
         useEffect(() => {
-
             if (error) {
-                return alert.error(error);
-                // dispatch(clearErrors());
+                alert.error(error);
+                dispatch(clearErrors());
             }
 
             dispatch(getProduct());
         }, [dispatch, error, alert]);
 
-
         return ( <
-                Fragment > {
+                Fragment > { " " } {
                     loading ? ( <
                         Loader / >
                     ) : ( <

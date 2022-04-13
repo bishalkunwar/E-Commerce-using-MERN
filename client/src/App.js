@@ -2,6 +2,8 @@ import "./App.css";
 import Header from "./component/layout/Header/Header.js";
 import Footer from "./component/layout/Footer/Footer.js";
 import Home from "./component/Home/Home.js";
+import Products from "./component/Product/Products.js";
+import Search from "./component/Product/Search.js";
 // import Loader from "./component/layout/Loader/Loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WebFont from "webfontloader";
@@ -30,8 +32,14 @@ const App = () => {
         />{" "} <
         Route exact path = "/product/:id"
         component = { ProductDetails }
-        /> < /
-        Switch > { " " } <
+        />{" "} <
+        Route exact path = "/products"
+        component = { Products }
+        />{" "} <
+        Route exact path = "/search"
+        component = { Search }
+        /> <
+        /Switch>{" "} <
         Footer / >
         <
         /Router>
