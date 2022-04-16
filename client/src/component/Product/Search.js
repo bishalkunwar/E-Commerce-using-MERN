@@ -1,8 +1,35 @@
-import React from 'react'
+import React, { Fragment, useState } from "react";
+import "./Search.css";
 
-const Search = () => {
+const Search = ({ history }) => {
+    const [keyword, setkeyword] = useState();
+
+    const searchSubmitHandler = (e) => {
+        e.preventDefault();
+        if (keyword.trim()) {
+            history.push(`/products/${keyword}`);
+        } else {
+            history.push(`/products`);
+        }
+    };
+
     return ( <
-        div > Search < /div>
+        Fragment >
+        <
+        form className = "searchBox"
+        onSubmit = { searchSubmitHandler } >
+        <
+        input type = "text"
+        placeholder = "Search a Product ..."
+        onChange = {
+            (e) => setkeyword(e.target.value)
+        }
+        />{" "} <
+        input type = "submit"
+        value = "Search" / >
+        <
+        /form>{" "} < /
+        Fragment >
     );
 };
 
