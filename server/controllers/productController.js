@@ -1,4 +1,5 @@
 const express = require("express");
+const { result } = require("lodash");
 
 const Product = require("../models/productModel");
 const ApiFeatures = require("../utils/apifeatures");
@@ -32,10 +33,15 @@ exports.getAllProducts = async(req, res) => {
     const resultPerPage = 8;
     const productsCount = await Product.countDocuments();
     try {
-        const apiFeatures = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
-        const products = await apiFeatures.query;
+        const apiFeatures = new ApiFeatures(Product.find(), req.query).search().filter();
+        
+        let products = await apiFeatures.query;
+        let filteredProductsCount = products.length;
+        apiFeatures.pagination(resultPerPage);
+        
+        products = await apiFeatures.query;
 
-        res.status(200).json({ success: true, products, productsCount, resultPerPage, });
+        res.status(200).json({ success: true, products, productsCount, resultPerPage, filteredProductsCount,});
 
     } catch (error) {
         console.log(`error while fetching all products :>> ${error}`);

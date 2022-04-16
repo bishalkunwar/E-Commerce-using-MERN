@@ -20,7 +20,7 @@
         "express": "^4.17.3",
         "gitignore": "^0.7.0",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^6.2.4",
+        "mongoose": "^5.13.5",
         "nodemailer": "^6.7.2",
         "nodemon": "^2.0.15",
         "path": "^0.12.7",
