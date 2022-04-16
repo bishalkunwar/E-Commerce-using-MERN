@@ -3,13 +3,13 @@ import Header from "./component/layout/Header/Header.js";
 import Footer from "./component/layout/Footer/Footer.js";
 import Home from "./component/Home/Home.js";
 import Products from "./component/Product/Products.js";
+import ProductDetails from "./component/Product/ProductDetails";
 import Search from "./component/Product/Search.js";
 // import Loader from "./component/layout/Loader/Loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
 
-import ProductDetails from "./component/Product/ProductDetails";
 // import React from "react";
 
 const App = () => {
@@ -35,10 +35,19 @@ const App = () => {
         />{" "} <
         Route exact path = "/products"
         component = { Products }
-        />{" "} <
+        />{" "} 
+
+        <
+        Route path = "/products/:keyword"
+        component = { Products }
+        />{" "} 
+
+        <
         Route exact path = "/search"
         component = { Search }
-        /> <
+        />{" "} 
+
+        <
         /Switch>{" "} <
         Footer / >
         <

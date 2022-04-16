@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import "./Search.css";
 
 const Search = ({ history }) => {
-    const [keyword, setkeyword] = useState();
+    const [keyword, setkeyword] = useState("");
 
     const searchSubmitHandler = (e) => {
         e.preventDefault();
