@@ -5,6 +5,8 @@ import Home from "./component/Home/Home.js";
 import Products from "./component/Product/Products.js";
 import ProductDetails from "./component/Product/ProductDetails";
 import Search from "./component/Product/Search.js";
+import LoginSignUp from "./component/User/LoginSignUp";
+
 // import Loader from "./component/layout/Loader/Loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WebFont from "webfontloader";
@@ -46,6 +48,8 @@ const App = () => {
         Route exact path = "/search"
         component = { Search }
         />{" "} 
+
+        <Route exact path="/login" component={LoginSignUp} />
 
         <
         /Switch>{" "} <
