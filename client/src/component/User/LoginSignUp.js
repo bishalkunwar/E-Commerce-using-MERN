@@ -7,7 +7,7 @@ import "./LoginSignUp.css";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
-// import profile from "../../images/Profile.png";
+import Profile from "../../images/Profile.png";
 import { clearErrors, login, register } from '../../actions/userAction';
 
 
@@ -22,8 +22,8 @@ const LoginSignUp = ({history}) => {
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
 
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword]= useState("");
+  const [loginEmail, setLoginEmail] = useState("/Profile.png");
+  const [loginPassword, setLoginPassword]= useState("/Profile.png");
 
     const [user, setUser]= useState({
       name:"", email:"", password:"",
@@ -31,8 +31,8 @@ const LoginSignUp = ({history}) => {
 
   const {name, email, password}= user;
 
-  const [avatar, setAvatar]= useState("/Profile.png");
-  const [avatarPreview, setAvatarPreview]= useState("/Profile.png");
+  const [avatar, setAvatar]= useState({Profile});
+  const [avatarPreview, setAvatarPreview]= useState({Profile});
 
   const loginSubmit = (e)=>{
       e.preventDefault();
@@ -72,11 +72,11 @@ const LoginSignUp = ({history}) => {
   useEffect(()=>{
     if(error){
       alert.error(error);
-      dispatch(clearErrors);
+      dispatch(clearErrors());
     }
 
     if(isAuthenticated){
-      history.pushState("/account");
+      history.push("/account");
     }
 
   }, [dispatch, error, alert,history, isAuthenticated]);
@@ -161,16 +161,19 @@ const LoginSignUp = ({history}) => {
                
                <div className="signUpPassword">
                  <LockOpenIcon/>
-                 <input type="password" placeholder="Password" required name={password} value={password} onChange={registerDataChange} />
+                 <input type="password" placeholder="Password" required name="password" value={password} onChange={registerDataChange} />
                </div>
                
-               <div className="registerImage">
-                   <img src={avatarPreview} alt="Avatar Preview" />
-                   <input type="file" name="avatar" accept="image/*" onChange={registerDataChange}/>
-               </div>
-   
-               <input type="submit" value="register" className="signUpBtn" />
-   
+               <div id="registerImage">
+                  <img src={avatarPreview} alt="Avatar Preview" />
+                  <input
+                    type="file"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={registerDataChange}
+                  />
+                </div>
+                <input className="signUpBtn" type="submit" value="Register" />
              </form>
            </div>
          </div>

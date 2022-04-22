@@ -1,3 +1,4 @@
+const ErrorHander = require("../utils/errorhander");
 const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
@@ -36,7 +37,7 @@ exports.registerUser = async(req, res) => {
 
 
 // Login User.
-exports.loginUser = async(req, res) => {
+exports.loginUser = async(req, res, next) => {
     const { email, password } = req.body;
 
     try {
@@ -52,7 +53,7 @@ exports.loginUser = async(req, res) => {
 
         const isPasswordMatched = await user.comparePassword(password);
         if (!isPasswordMatched) {
-            res.status(401).json("Inalid email or invalid password");
+            return next(new ErrorHander("Invalid email or password", 401));
         }
 
         sendToken(user, 200, res);
