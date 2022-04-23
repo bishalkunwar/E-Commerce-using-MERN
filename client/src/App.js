@@ -14,6 +14,7 @@ import {loadUser} from "./actions/userAction";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
+// import { useEffect, useState } from "react";
 import store from "./store";
 // import React from "react";
 
@@ -32,7 +33,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      {isAuthenticated&& <UserOptions user={user}/>}
+      {isAuthenticated && <UserOptions user={user} />}
       <Switch>
         {" "}
         <Route exact path="/" component={Home} />{" "}

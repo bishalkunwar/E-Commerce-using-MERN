@@ -1,3 +1,4 @@
+const ErrorHander = require("../utils/errorhander");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
@@ -7,7 +8,7 @@ exports.isAuthenticatedUser = async(req, res, next) => {
 
     try {
         if (!token) {
-            res.status(401).json("Please login to access this resource.");
+            return next(new ErrorHander("Please Login to access this resource", 401));
         }
 
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
@@ -16,7 +17,7 @@ exports.isAuthenticatedUser = async(req, res, next) => {
         next();
     } catch (error) {
         console.log(`error accoured :>> ${error}`);
-        res.status(401).json({ message: `Authorization Token Isn\'t Valid, Authorization Failed! ${error}` });
+        res.status(401).json({ message: `${error}` });
 
     }
 };
@@ -26,10 +27,15 @@ exports.authorizeRoles = (...roles) => {
 
         try {
             if (!roles.includes(req.user.role)) {
-                res.status(403).json(`${req.user.role} is not allowed to access this resource.`);
-            }
-
-            next();
+                return next(
+                  new ErrorHander(
+                    `Role: ${req.user.role} is not allowed to access this resouce `,
+                    403
+                  )
+                );
+              }
+          
+              next();
 
         } catch (error) {
             console.log(error);
