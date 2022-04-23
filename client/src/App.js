@@ -7,6 +7,11 @@ import ProductDetails from "./component/Product/ProductDetails";
 import Search from "./component/Product/Search.js";
 import LoginSignUp from "./component/User/LoginSignUp";
 import UserOptions from "./component/layout/Header/UserOptions";
+import ProtectedRoute from "./component/Route/ProtectedRoute";
+import Profile from "./component/User/Profile.js";
+import UpdateProfile from "./component/User/UpdateProfile.js";
+
+
 import {useSelector} from "react-redux";
 import {loadUser} from "./actions/userAction";
 
@@ -42,6 +47,8 @@ const App = () => {
         <Route path="/products/:keyword" component={Products} />{" "}
         <Route exact path="/search" component={Search} />{" "}
         <Route exact path="/login" component={LoginSignUp} />
+        <ProtectedRoute exact path="/account" component={Profile}/>
+        <ProtectedRoute exact path="/me/update" component={UpdateProfile}/>
       </Switch>{" "}
       <Footer />
     </Router>
