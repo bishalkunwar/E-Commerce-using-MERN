@@ -1,31 +1,29 @@
-
-import React, {Fragment, useState, useEffect} from 'react';
+import React, { Fragment, useState, useEffect } from "react";
 import "./UpdateProfile.css";
 import Loader from "../layout/Loader/Loader";
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
-import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile, clearErrors, loadUser } from '../../actions/userAction';
-import { useAlert } from 'react-alert';
-import { UPDATE_PROFILE_RESET } from '../../constants/userConstants';
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, updateProfile, loadUser } from "../../actions/userAction";
+import { useAlert } from "react-alert";
+import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 
-
-const UpdateProfile = ({history}) => {
-
+const UpdateProfile = ({ history }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const {user} = useSelector((state)=>state.user);
-  const {error, isUpdated, loading} = useSelector((state)=>state.profile);
+  const { user } = useSelector((state) => state.user);
+  const { error, isUpdated, loading } = useSelector((state) => state.profile);
 
   const [name, setName] = useState("");
-  const [email, setEmail]= useState("");
-  const [avatar, setAvatar]=useState();
-  const [avatarPreview, setAvatarPreview]=useState("/Profile.png");
+  const [email, setEmail] = useState("");
+  const [avatar, setAvatar] = useState();
+  const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
-  const updateProfileSubmit=(e)=>{
+  const updateProfileSubmit = (e) => {
     e.preventDefault();
+
     const myForm = new FormData();
 
     myForm.set("name", name);
@@ -34,11 +32,11 @@ const UpdateProfile = ({history}) => {
     dispatch(updateProfile(myForm));
   };
 
-  const updateProfileDataChange = (e)=>{
+  const updateProfileDataChange = (e) => {
     const reader = new FileReader();
 
-    reader.onload=()=>{
-      if(reader.readyState===2){
+    reader.onload = () => {
+      if (reader.readyState === 2) {
         setAvatarPreview(reader.result);
         setAvatar(reader.result);
       }
@@ -47,56 +45,82 @@ const UpdateProfile = ({history}) => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  useEffect(()=>{
-    if(user){
-      setName(uesr.name);
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
       setEmail(user.email);
       setAvatarPreview(user.avatar.url);
     }
 
-    if(error){
+    if (error) {
       alert.error(error);
-      dispatch(clearErrors);
+      dispatch(clearErrors());
     }
 
-    if(isUpdated){
+    if (isUpdated) {
       alert.success("Profile Updated Successfully");
       dispatch(loadUser());
 
       history.push("/account");
 
       dispatch({
-        type:UPDATE_PROFILE_RESET,
+        type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, error, alert, history, user,
-  isUpdated]);
-
+  }, [dispatch, error, alert, history, user, isUpdated]);
   return (
     <Fragment>
-      {loading?(<Loader/>):(
+      {loading ? (
+        <Loader />
+      ) : (
         <Fragment>
           <MetaData title="Update Profile" />
           <div className="updateProfileContainer">
             <div className="updateProfileBox">
-              <h2 className="updateProfileHeading">
-                Update Profile
-              </h2>
-              <form className="updateProfileForm" encType="multipart/form-data" onSubmit={updateProfileSubmit}>
+              <h2 className="updateProfileHeading">Update Profile</h2>
+
+              <form
+                className="updateProfileForm"
+                encType="multipart/form-data"
+                onSubmit={updateProfileSubmit}
+              >
                 <div className="updateProfileName">
-                  <FaceIcon/>
-                  <input type="text"  placeholder="Name" required name="name" value="name" onChange={(e)=>setName(e.target.value)}/>
+                  <FaceIcon />
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    required
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </div>
                 <div className="updateProfileEmail">
-                  <MailOutlineIcon/>
-                  <input type="email" placeholder="Email" required name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                  <MailOutlineIcon />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
-                <div className="updateProfileImage">
+
+                <div id="updateProfileImage">
                   <img src={avatarPreview} alt="Avatar Preview" />
-                  <input type="file" name="avatar" accept="image/*" onChange={updateProfileDataChange}/>
+                  <input
+                    type="file"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={updateProfileDataChange}
+                  />
                 </div>
-                
-                <input type="submit" value="Update" className="updateProfileBtn"/>
+                <input
+                  type="submit"
+                  value="Update"
+                  className="updateProfileBtn"
+                />
               </form>
             </div>
           </div>

@@ -8,8 +8,9 @@ import Search from "./component/Product/Search.js";
 import LoginSignUp from "./component/User/LoginSignUp";
 import UserOptions from "./component/layout/Header/UserOptions";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
-import Profile from "./component/User/Profile.js";
+import Profile from "./component/User/Profile";
 import UpdateProfile from "./component/User/UpdateProfile.js";
+import UpdatePassword from "./component/User/UpdatePassword.js";
 
 
 import {useSelector} from "react-redux";
@@ -49,6 +50,7 @@ const App = () => {
         <Route exact path="/login" component={LoginSignUp} />
         <ProtectedRoute exact path="/account" component={Profile}/>
         <ProtectedRoute exact path="/me/update" component={UpdateProfile}/>
+        <ProtectedRoute exact path = "/password/update" component={UpdatePassword} />
       </Switch>{" "}
       <Footer />
     </Router>
