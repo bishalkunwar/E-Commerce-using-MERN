@@ -11,7 +11,7 @@ import ProtectedRoute from "./component/Route/ProtectedRoute";
 import Profile from "./component/User/Profile";
 import UpdateProfile from "./component/User/UpdateProfile.js";
 import UpdatePassword from "./component/User/UpdatePassword.js";
-
+import ForgotPassword from "./component/User/ForgotPassword.js";
 
 import {useSelector} from "react-redux";
 import {loadUser} from "./actions/userAction";
@@ -51,6 +51,8 @@ const App = () => {
         <ProtectedRoute exact path="/account" component={Profile}/>
         <ProtectedRoute exact path="/me/update" component={UpdateProfile}/>
         <ProtectedRoute exact path = "/password/update" component={UpdatePassword} />
+        
+        <Route exact path="/password/forgot" component={ForgotPassword} />
       </Switch>{" "}
       <Footer />
     </Router>
