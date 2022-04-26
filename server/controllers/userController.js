@@ -82,12 +82,12 @@ exports.logout = async(req, res) => {
 
 
 // Forget Password.
-exports.forgotPassword = async(req, res) => {
+exports.forgotPassword = async(req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
 
     try {
         if (!user) {
-            res.send(400).json("User not found");
+            return next(new ErrorHander("User not found", 404));
         }
 
         // Get Reset Password Token::
@@ -103,7 +103,7 @@ exports.forgotPassword = async(req, res) => {
         try {
             await sendEmail({
                 email: user.email,
-                subject: 'E-Commerce Password Recovery',
+                subject: `E-Commerce Password Recovery`,
                 message,
             });
 
@@ -117,12 +117,12 @@ exports.forgotPassword = async(req, res) => {
 
             await user.save({ validateBeforeSave: false });
 
-            res.status(500).json(error);
+           return next(new ErrorHander(error.message, 500));
 
         }
 
     } catch (error) {
-        res.status(500).json(error);
+        return next(new ErrorHander(error.message, 500));
 
     }
 };
