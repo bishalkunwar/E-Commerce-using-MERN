@@ -60,7 +60,7 @@ const ResetPassword = ({history, match}) => {
                                 </div>
                                 <div>
                                     <LockIcon/>
-                                    <input type="password" placeholder="Confirm Password" required value={confirmPassword} onChange={(e)=setConfirmPassword(e.target.value)}/>
+                                    <input type="password" placeholder="Confirm Password" required value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
                                 </div>
                                 <input type="submit" value="Update" className="resetPasswordBtn"/>
                             </form>
