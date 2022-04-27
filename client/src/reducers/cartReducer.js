@@ -1,11 +1,9 @@
 import {
     ADD_TO_CART,
-    REMOVE_CART_ITEM,
+    REMOVE_CART_ITEM, SAVE_SHIPPING_INFO,
     
   } from "../constants/cartConstants";
-
-
-  //SAVE_SHIPPING_INFO, 
+ 
   
   export const cartReducer=(state={cartItems:[], shippingInfo:{}}, action)=>{
       switch(action.type){
@@ -30,11 +28,11 @@ import {
                 cartItems:state.cartItems.filter((i)=>i.product!==action.payload)
             };
 
-        // case SAVE_SHIPPING_INFO:
-        //     return{
-        //         ...state,
-        //         shippingInfo:action.payload,
-        //     };
+        case SAVE_SHIPPING_INFO:
+            return{
+                ...state,
+                shippingInfo:action.payload,
+            };
 
             default:
                 return state;

@@ -66,7 +66,7 @@ const Cart = ({history}) => {
                             <CartItemCard item={item} deleteCartItems={deleteCartItems} />
                             <div className="cartInput">
                                 <button onClick={()=>decreaseQuantity(item.product, item.quantity)}>                                   -
-                                </button>
+                                                                                                   </button>
                                 <input type="number" value={item.quantity} readOnly />
 
                                 <button onClick={()=>increaseQuantity(item.product, item.quantity, item.stock)}>+</button>

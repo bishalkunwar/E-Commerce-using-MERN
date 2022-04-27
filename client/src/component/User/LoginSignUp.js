@@ -11,7 +11,7 @@ import Profile from "../../images/Profile.png";
 import { clearErrors, login, register } from '../../actions/userAction';
 
 
-const LoginSignUp = ({history}) => {
+const LoginSignUp = ({history, location}) => {
  
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -69,6 +69,8 @@ const LoginSignUp = ({history}) => {
     }
   };
 
+  const redirect = location.search?location.search.split("=")[1]:"/account";
+
   useEffect(()=>{
     if(error){
       alert.error(error);
@@ -76,10 +78,10 @@ const LoginSignUp = ({history}) => {
     }
 
     if(isAuthenticated){
-      history.push("/account");
+      history.push(redirect);
     }
 
-  }, [dispatch, error, alert,history, isAuthenticated]);
+  }, [dispatch, error, alert,history, redirect, isAuthenticated]);
 
   const switchTabs=(e, tab)=>{
     if(tab==="login"){
