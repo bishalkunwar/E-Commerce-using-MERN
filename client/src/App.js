@@ -14,6 +14,8 @@ import UpdatePassword from "./component/User/UpdatePassword.js";
 import ForgotPassword from "./component/User/ForgotPassword.js";
 import ResetPassword from "./component/User/ResetPassword.js";
 
+import Cart from "./component/Cart/Cart";
+
 import {useSelector} from "react-redux";
 import {loadUser} from "./actions/userAction";
 
@@ -54,7 +56,8 @@ const App = () => {
         <ProtectedRoute exact path = "/password/update" component={UpdatePassword} />
         <Route exact path="/password/forgot" component={ForgotPassword} />
         <Route exact path="/password/reset/:token" component={ResetPassword}/>
-      </Switch>{" "}
+        <Route exact path="/cart" component={Cart}/>
+              </Switch>{" "}
       <Footer />
     </Router>
   );

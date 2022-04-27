@@ -38,7 +38,7 @@ const ProductDetails = ({ match }) => {
   const [quantity, setQuantity] = useState(1);
 
   const increaseQuantity = () => {
-    if (product.Stock <= quantity) {
+    if (product.stock <= quantity) {
       return;
     }
     const qty = quantity + 1;
@@ -79,6 +79,7 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
+          <MetaData title="Product Details"/>
           <div className="ProductDetails">
             <div>
               <Carousel>
