@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react'
+import React, {Fragment, useState} from 'react'
 import "./Shipping.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingInfo } from '../../actions/cartAction';
@@ -9,9 +9,9 @@ import LocationCityIcon from "@material-ui/icons/LocationCity";
 import PublicIcon from "@material-ui/icons/Public";
 import PhoneIcon from "@material-ui/icons/Phone";
 import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
-import {country, state} from "country-state-city";
+import {Country, State} from "country-state-city";
 import { useAlert } from 'react-alert';
-// import CheckoutSteps from "../Cart/CheckoutSteps";
+import CheckoutSteps from "../Cart/CheckoutSteps.js";
 
 const Shipping = ({history}) => {
 
@@ -43,7 +43,7 @@ const Shipping = ({history}) => {
   return (
     <Fragment>
         <MetaData title="Shopping Details"/>
-
+        <CheckoutSteps activeStep={0} />
         <div className="shippingContainer">
             <div className="shippingBox">
                 <h2 className="shippingHeading">
@@ -71,7 +71,40 @@ const Shipping = ({history}) => {
                         <input type="number" placeholder="Phone Number" required value={phoneNo} onChange={(e)=>setPhoneNo(e.target.value)} size="10"/>
                     </div>
 
-                    
+                    <div>
+                        <PublicIcon/>
+                        <select value={country} onChange={(e)=>setCountry(e.target.value)}>
+                            <option value="">
+                                Country 
+
+                                </option>
+                                {Country && Country.getAllCountries().map((item)=>(
+                                    <option key={item.isoCode} value={item.isoCode}>
+                                        {item.name}
+                                    </option>
+                                ))}
+                           
+                        </select>
+                    </div>
+
+                    {country && (
+                        <div>
+                            <TransferWithinAStationIcon/>
+
+                            <select required value={state} onChange={(e)=>setState(e.target.value)}>
+                                <option value="">
+                                    State
+                                </option> 
+
+                                {State&&State.getStatesOfCountry(country).map((item)=>(
+                                    <option key={item.isoCode} value={item.isoCode}>{item.name}</option>
+                                ))}                               
+                            </select>
+                        </div>
+                    )}
+
+                   <input type="submit" value="Continue" className="shippingBtn" disabled={state?false:true} />
+
                 </form>
 
             </div>
