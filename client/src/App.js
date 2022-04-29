@@ -17,6 +17,10 @@ import ResetPassword from "./component/User/ResetPassword.js";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping.js";
 import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
+import axios from "axios";
+import Payment from "./component/Cart/Payment";
+import {Elements} from "@stripe/react-stripe-js";
+import {loadStripe} from "@stripe/stripe-js";
 
 import {useSelector} from "react-redux";
 import {loadUser} from "./actions/userAction";
@@ -31,7 +35,14 @@ import store from "./store";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
-  React.useEffect(() => {
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey(){
+      const {data} = await axios.get("/api/v1/stripeapikey");
+      setStripeApiKey(data.stripeApiKey);
+  }
+  
+  useEffect(() => {
     WebFont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
@@ -39,12 +50,18 @@ const App = () => {
     });
 
     store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
+      {stripeApiKey && (
+        <Elements stripe={loadStripe(stripeApiKey)}>
+          <ProtectedRoute exact path="/process/payment" component={Payment} />
+        </Elements>
+      )}
       <Switch>
         {" "}
         <Route exact path="/" component={Home} />{" "}
