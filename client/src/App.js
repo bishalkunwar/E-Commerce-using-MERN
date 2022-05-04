@@ -17,10 +17,12 @@ import ResetPassword from "./component/User/ResetPassword.js";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping.js";
 import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
-import axios from "axios";
-import Payment from "./component/Cart/Payment";
-import {Elements} from "@stripe/react-stripe-js";
-import {loadStripe} from "@stripe/stripe-js";
+// import axios from "axios";
+// import Payment from "./component/Cart/Payment";
+// import {Elements} from "@stripe/react-stripe-js";
+// import {loadStripe} from "@stripe/stripe-js";
+// import OrderSuccess from "./component/Cart/OrderSuccess";
+// import MyOrders from "/component/Cart/MyOrders"; 
 
 import {useSelector} from "react-redux";
 import {loadUser} from "./actions/userAction";
@@ -29,18 +31,18 @@ import {loadUser} from "./actions/userAction";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
-// import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import store from "./store";
 
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
-  const [stripeApiKey, setStripeApiKey] = useState("");
+  // const [stripeApiKey, setStripeApiKey] = useState("");
 
-  async function getStripeApiKey(){
-      const {data} = await axios.get("/api/v1/stripeapikey");
-      setStripeApiKey(data.stripeApiKey);
-  }
+  // async function getStripeApiKey(){
+  //     const {data} = await axios.get("/api/v1/stripeapikey");
+  //     setStripeApiKey(data.stripeApiKey);
+  // }
   
   useEffect(() => {
     WebFont.load({
@@ -50,18 +52,23 @@ const App = () => {
     });
 
     store.dispatch(loadUser());
-    getStripeApiKey();
+    // getStripeApiKey();
   }, []);
 
+
+  // {stripeApiKey && (
+  //   <Elements stripe={loadStripe(stripeApiKey)}>
+  //     <ProtectedRoute exact path="/process/payment" component={Payment} />
+  //   </Elements>
+  // )}
+
+  // <ProtectedRoute exact path="/success" component={OrderSuccess} />
+  //  <ProtectedRoute exact path="/orders" component={MyOrders} />
   return (
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
-      {stripeApiKey && (
-        <Elements stripe={loadStripe(stripeApiKey)}>
-          <ProtectedRoute exact path="/process/payment" component={Payment} />
-        </Elements>
-      )}
+
       <Switch>
         {" "}
         <Route exact path="/" component={Home} />{" "}
@@ -78,6 +85,7 @@ const App = () => {
         <Route exact path="/cart" component={Cart}/>
         <ProtectedRoute exact path="/shipping" component={Shipping}/>
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+        
         </Switch>
       <Footer />
     </Router>
