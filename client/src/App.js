@@ -22,7 +22,11 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
 // import {Elements} from "@stripe/react-stripe-js";
 // import {loadStripe} from "@stripe/stripe-js";
 // import OrderSuccess from "./component/Cart/OrderSuccess";
-// import MyOrders from "/component/Cart/MyOrders"; 
+// import MyOrders from "./component/Cart/MyOrders"; 
+// import OrderDetails from "./component/Order/OrderDetails";
+
+// Admin components calling.
+import Dashboard from "./component/Admin/Dashboard.js";
 
 import {useSelector} from "react-redux";
 import {loadUser} from "./actions/userAction";
@@ -64,6 +68,9 @@ const App = () => {
 
   // <ProtectedRoute exact path="/success" component={OrderSuccess} />
   //  <ProtectedRoute exact path="/orders" component={MyOrders} />
+  // <ProtectedRoute exact path="/orders" component={MyOrders} />
+  // <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
+  
   return (
     <Router>
       <Header />
@@ -85,7 +92,8 @@ const App = () => {
         <Route exact path="/cart" component={Cart}/>
         <ProtectedRoute exact path="/shipping" component={Shipping}/>
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
-        
+       
+        <ProtectedRoute isAdmin={true} exact path="/admin/dashboard" component={Dashboard}/>
         </Switch>
       <Footer />
     </Router>
