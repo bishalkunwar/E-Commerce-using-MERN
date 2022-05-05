@@ -98,7 +98,7 @@ const Payment = ({ history }) => {
 
           history.push("/success");
         } else {
-          alert.error("There's some issue while processing payment ");
+          alert.error("There's some issue w hile processing payment ");
         }
       }
     } catch (error) {
