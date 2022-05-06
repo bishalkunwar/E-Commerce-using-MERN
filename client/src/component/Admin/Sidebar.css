@@ -2,8 +2,8 @@
     background-color: rgb(255,255,255);
     display: flex;
     flex-direction: column;
-    padding: 5rem 0;
-    padding-left: 2rem;
+    padding: 4rem 0;
+    
 }
 
 .sidebar>a:first-child{
@@ -11,8 +11,7 @@
 }
 
 .sidebar>a>img{
-    padding-left: 2rem;
-    width: 10%;
+    width: 100%;
     transition: all 0.5s;
 }
 
