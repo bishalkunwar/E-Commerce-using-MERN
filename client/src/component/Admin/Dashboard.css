@@ -75,10 +75,32 @@ position:absolute;
   }
 
 .lineChart{
-
+  width: 80%;
+  color: rgb(255,255,255);
 }
 
-.doughtnutChart{
 
-    
+.doughnutChart {
+  width: 30vmax;
+  margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboardContainer {
+    border-left: none;
+  }
+
+  .dashboardSummary > div > p {
+    margin: 0;
+  }
+
+  .dashboardSummaryBox2 > a {
+    padding: 0.5rem;
+    margin: 1rem;
+    font: 300 0.9rem "Roboto";
+  }
 }
