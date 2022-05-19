@@ -17,7 +17,7 @@ const reducer = combineReducers({
     // myOrders:myOrdersReducer,
     // orderDetails:orderDetailsReducer,
     newReview:newReviewReducer,
-    newProduct:newProductReducer,
+    newProduct: newProductReducer,
     product:productReducer,
 });
 

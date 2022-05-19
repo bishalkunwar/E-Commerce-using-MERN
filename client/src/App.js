@@ -28,8 +28,8 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
 // Admin components calling.
 import Dashboard from "./component/Admin/Dashboard.js";
 import ProductList from "./component/Admin/ProductList.js";
-// import NewProduct from "./component/Admin/NewProduct.js";
-// import UpdateProduct from "./component/Admin/UpdateProduct.js";
+import NewProduct from "./component/Admin/NewProduct";
+import UpdateProduct from "./component/Admin/UpdateProduct.js";
 
 import {useSelector} from "react-redux";
 import {loadUser} from "./actions/userAction";
@@ -73,8 +73,6 @@ const App = () => {
   //  <ProtectedRoute exact path="/orders" component={MyOrders} />
   // <ProtectedRoute exact path="/orders" component={MyOrders} />
   // <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
-  // <ProtectedRoute isAdmin={true} exact path="/admin/product" component={NewProduct}/>
-  //       <ProtectedRoute isAdmin={true} exact path="/admin/product/:id" component={UpdateProduct} />
   
   return (
     <Router>
@@ -100,7 +98,14 @@ const App = () => {
        
         <ProtectedRoute isAdmin={true} exact path="/admin/dashboard" component={Dashboard}/>
         <ProtectedRoute exact path="/admin/products" isAdmin={true} component={ProductList} />
-        
+        <ProtectedRoute
+          exact
+          path="/admin/product"
+          isAdmin={true}
+          component={NewProduct}
+        />
+        <ProtectedRoute isAdmin={true} exact path="/admin/product/:id" component={UpdateProduct} />
+  
         </Switch>
       <Footer />
     </Router>

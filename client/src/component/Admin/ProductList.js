@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import "./ProductList.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrors, getAdminProduct } from '../../actions/productAction';
+import { clearErrors, getAdminProduct, deleteProduct } from '../../actions/productAction';
 import {Link} from "react-router-dom";
 import { useAlert } from 'react-alert';
 import MetaData from "../layout/MetaData";
@@ -10,7 +10,7 @@ import { Button } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
-// import {DELETE_PRODUCT_RESET} from "../../constants/productConstants";
+import {DELETE_PRODUCT_RESET} from "../../constants/productConstants";
 import { useEffect } from 'react';
 
 
@@ -22,10 +22,10 @@ const ProductList = ({history}) => {
 
     const {error, products} = useSelector((state)=>state.products);
 
-    // const {error:deleteError, isDeleted} = useSelector((state)=>state.product);
+    const {error:deleteError, isDeleted} = useSelector((state)=>state.product);
 
     const deleteProductHandler=(id)=>{
-        // dispatch(deleteProduct(id));
+        dispatch(deleteProduct(id));
     };
 
     useEffect(()=>{
@@ -34,22 +34,20 @@ const ProductList = ({history}) => {
             dispatch(clearErrors());
         };
 
-        // if(deleteError){
-        //     alert.error(deleteError);
-        //     dispatch(clearErrors());
-        // };
+        if(deleteError){
+            alert.error(deleteError);
+            dispatch(clearErrors());
+        };
 
-        // if(isDeleted){
-        //     alert.success("Product Deleted Successfully");
-        //     history.push("/admin/dashboard");
-        //     // dispatch({type:DELETE_PRODUCT_RESET});
-        // };
+        if(isDeleted){
+            alert.success("Product Deleted Successfully");
+            history.push("/admin/dashboard");
+            dispatch({type:DELETE_PRODUCT_RESET});
+        };
 
         dispatch(getAdminProduct());
 
-
-
-    },[dispatch, error, alert, history]);  // deleteError, , isDeleted
+    }, [dispatch, error, alert, history, deleteError, isDeleted]);  
   
 
     const columns = [

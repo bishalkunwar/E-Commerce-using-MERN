@@ -8,9 +8,9 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
-    NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_RESET, NEW_PRODUCT_FAIL,
-    UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS, UPDATE_PRODUCT_RESET, UPDATE_PRODUCT_FAIL,
-    DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_RESET, DELETE_PRODUCT_FAIL,
+    NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL,
+    UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS, UPDATE_PRODUCT_FAIL,
+    DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL,
     NEW_REVIEW_REQUEST, 
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
@@ -87,23 +87,31 @@ export const getAdminProduct = ()=>async(dispatch)=>{
 
 
 // create product.
-export const createProduct = (productData)=>async(dispatch)=>{
+export const createProduct = (productData) => async (dispatch) => {
     try {
-        dispatch({type:NEW_PRODUCT_REQUEST});
-
-        const config = {
-            headers:{"Content-Type":"application/json",}
-        };
-
-        const {data}=await axios.post(`/api/v1/admin/product/new`, productData, config);
-        
-        dispatch({type:NEW_PRODUCT_SUCCESS, payload:data});
-    
+      dispatch({ type: NEW_PRODUCT_REQUEST });
+  
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+  
+      const { data } = await axios.post(
+        `/api/v1/admin/product/new`,
+        productData,
+        config
+      );
+  
+      dispatch({
+        type: NEW_PRODUCT_SUCCESS,
+        payload: data,
+      });
     } catch (error) {
-        dispatch({type:NEW_PRODUCT_FAIL, payload:error.response.data.message});
+      dispatch({
+        type: NEW_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
     }
-};
-
+  };
 
 // update product.
 export const updateProduct = (id, productData)=>async(dispatch)=>{
